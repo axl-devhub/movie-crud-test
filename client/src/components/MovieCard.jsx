@@ -21,7 +21,7 @@ const MovieCard = ({ movie, handleDelete, handleEdit, setCurrentRoute }) => {
         <CardHeader floated={false}>
           <img
             src={API_URL + "/" + movie.image}
-            alt="ui/ux review check"
+            alt="Movie Image"
           />
           <div className=" absolute inset-0 h-full w-full" />
           {/* <IconButton
@@ -40,7 +40,7 @@ const MovieCard = ({ movie, handleDelete, handleEdit, setCurrentRoute }) => {
             </svg>
           </IconButton> */}
         </CardHeader>
-        <CardBody>
+        <CardBody className="min-h-48">
           <div className="mb-3 flex items-center justify-between">
             <Typography variant="h5" color="white" className="font-medium">
               {movie.title}

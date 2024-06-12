@@ -55,7 +55,7 @@ const MovieForm = ({ task, setCurrentRoute }) => {
   useEffect(() => {
     if (id) {
       try {
-        fetch(`${API_URL}/movies/${id}`)
+        fetch(`${API_URL}/api/Movies/${id}`)
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
@@ -111,25 +111,22 @@ const MovieForm = ({ task, setCurrentRoute }) => {
         revenue,
       });
   
-      const movieUpload = {
-        title,
-        sinopsis,
-        rating,
-        year,
-        director,
-        budget,
-        revenue,
-      };
-  
       const formData = new FormData();
-      formData.append("movie", JSON.stringify(movieUpload));
+
+      formData.append("Title", title);
+      formData.append("Sinopsis", sinopsis);
+      formData.append("Year", year);
+      formData.append("Rating", rating);
+      formData.append("Director", director);
+      formData.append("Budget", budget);
+      formData.append("Revenue", revenue);
       if (image)
-        formData.append("image", image);
+        formData.append("Image", image);
       console.log(formData);
 
       if (task === "add") {
       try {
-        fetch(`${API_URL}/movies`, {
+        fetch(`${API_URL}/api/Movies`, {
           method: "POST",
           // Remove the Content-Type header
           body: formData,
@@ -157,7 +154,7 @@ const MovieForm = ({ task, setCurrentRoute }) => {
     }
     else if (task === "edit") {
       try {
-        fetch(`${API_URL}/movies/${movie.id}`, {
+        fetch(`${API_URL}/api/Movies/${movie.id}`, {
           method: "PUT",
           body: formData,
         }).then((response) => {
@@ -178,9 +175,9 @@ const MovieForm = ({ task, setCurrentRoute }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className=" m-20 flex flex-row w-[90vw] gap-10 overflow-x-hidden">
-          <div className="w-3/4 justify-around flex-col">
-            <Card className=" bg-gray-900 gap-y-12 gap-x-5 ">
+        <div className=" m-20 flex flex-col md:flex-row lg:flex-row w-[90vw] gap-10">
+          <div className="lg:w-3/4 justify-around flex-col">
+            <Card className=" bg-gray-900 gap-y-11 gap-x-5 ">
               <Typography variant="h5" color="white">
                 {task === "add"
                   ? "Agregar"
@@ -278,8 +275,8 @@ const MovieForm = ({ task, setCurrentRoute }) => {
               </div>
             </Card>
           </div>
-          <div className=" w-1/4 flex-col ml-12">
-            <Card className={task === "read" ? "h-full w-auto" : "h-3/4 w-auto"}>
+          <div className="lg:w-1/4 max-w-[400px] flex-col ml-12">
+            <Card className={task === "read" ? "h-full w-auto" : "h-3/4 w-auto max-h-[440px] "}>
               <img
                 className="h-full w-auto rounded-lg object-cover"
                 src={

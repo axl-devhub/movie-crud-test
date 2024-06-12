@@ -57,7 +57,7 @@ const MoviesPage = ({ currentRoute, setCurrentRoute }) => {
     if (confirm("Seguro que quieres borrar esta pelicula") === false) return;
     try {
       await axios.delete(
-        `${API_URL}/movies/${id}`
+        `${API_URL}/api/Movies/${id}`
       );
       alert("Pelicula borrada");
       useMovies(activePage, resultsPerPage, setMovies, setPages);

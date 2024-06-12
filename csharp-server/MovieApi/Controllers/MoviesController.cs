@@ -128,7 +128,7 @@ namespace MovieApi.Controllers
 
                 // Generate a unique file name to prevent overwriting
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(movieUpload.Image.FileName);
-                var filePath = Path.Combine(uploadPath, fileName);
+                var filePath = Path.Combine($"{uploadPath}/public", fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
